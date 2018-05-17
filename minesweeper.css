@@ -1,0 +1,35 @@
+table {
+  border-collapse: collapse;
+  
+}
+
+td {
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+  border: solid 1px black;
+ 
+}
+
+.n0 { color:  lightgray; }
+.n1 { color: grey; }
+.n2 { color:  lightgreen; }
+.n3 { color:  seagreen; }
+.n4 { color:  green; }
+.n5 { color:  lightcoral; }
+.n6 { color:  mediumvioletred; }
+.n7 { color:  red; }
+.n8 { color:  darkred; }
+
+.n0:after { content: "0"}
+.n1:after { content: "1"}
+.n2:after { content: "2"}
+.n3:after { content: "3"}
+.n4:after { content: "4"}
+.n5:after { content: "5"}
+.n6:after { content: "6"}
+.n7:after { content: "7"}
+.n8:after { content: "8"}
+
+.mine { background-color: red; color: black}
+.mine:after { content: "X"}
