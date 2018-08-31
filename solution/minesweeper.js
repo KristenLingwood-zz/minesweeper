@@ -28,7 +28,11 @@ class Cell {
     this.revealAndCheckNeighbors();
 
     if (this.mine) {
-      return this.board.game.endGame()
+      return this.board.game.endGame(false)
+    } else {
+      if (this.board.left === 0) {
+        return this.board.game.endGame(true);
+      }
     }
   }
 
@@ -46,6 +50,7 @@ class Cell {
       if (!cell.mine && !cell.revealed) {
         cell.revealed = true;
         cell.show();
+        this.board.left -= 1;
         if (cell.number === 0) {
           toCheck.push(...cell.neighbors())
         }
@@ -73,6 +78,7 @@ class Board {
     this.game = game;             // game object
     this.width = width;
     this.height = height;
+    this.left = width * height;   // non-mine, non-revealed cells
     this.cells = []
     for (let y = 0; y < height; y++) {
       const row = [];
@@ -91,6 +97,7 @@ class Board {
       const cell = this.cells[y][x]
       if (!cell.mine) {
         cell.mine = true;
+        this.left -= 1;
         placed += 1;
         for (let n of cell.neighbors()) {
           n.number += 1;
@@ -122,13 +129,13 @@ class Game {
     this.board.makeBoard();
   }
 
-  endGame() {
+  endGame(isWin) {
     for (let row of this.board.cells) {
       for (let cell of row) {
         cell.show(true);
       }
     }
-    alert("You lose");
+    alert(isWin);
   }
 }
 
