@@ -2,6 +2,8 @@
 Minesweeper JS
 ==============
 
+.. image:: minesweeper.png
+
 In this exercise, you'll add features to a very barebones Minesweeper
 game to make it more full-featured.
 
@@ -104,4 +106,3 @@ icons for the bomb that was set up, flag icons for the flags, etc.
 Add some of these!
 
 
-.. image:: minesweeper.png
