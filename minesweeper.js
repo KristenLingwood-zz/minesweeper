@@ -45,6 +45,7 @@ class Cell {
   //right click flags a cell as a mine and makes it unclickable
   handleRightClick(evt) {
     evt.preventDefault();
+    if (this.revealed) return;
     this.flagged = !this.flagged;
     this.show(true);
     this.toggledFlagged()
