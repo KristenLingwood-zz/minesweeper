@@ -1,3 +1,4 @@
+
 class Cell {
   constructor(board, y, x) {
     this.board = board;    // board object
@@ -9,13 +10,21 @@ class Cell {
     this.number = 0;       // Number of mine neighbors                     
   }
 
+
+  // checks through all neighboring cells
   neighbors() {
+    // new array of coords... what are these?
     let out = [];
+    // iterate from -1 to 1... what is xdelta? x change?
     for (let xdelta = -1; xdelta <= 1; xdelta++) {
+      // y iteration
       for (let ydelta = -1; ydelta <= 1; ydelta++) {
+        // if x and y are the same break this iteration and move on to the next one
         if (xdelta === 0 && ydelta === 0) continue;
+        // define new xy coords
         let newX = this.x + xdelta;
         let newY = this.y + ydelta;
+        //chec if x and y coords are inside the board
         if (newX >= 0 && newX < this.board.width
           && newY >= 0 && newY < this.board.height)
           out.push(this.board.cells[newY][newX]);
@@ -24,9 +33,9 @@ class Cell {
     return out;
   }
 
+
   handleClick() {
     this.revealAndCheckNeighbors();
-
     if (this.mine) {
       return this.board.game.endGame(false)
     } else {
@@ -35,6 +44,7 @@ class Cell {
       }
     }
   }
+
 
   revealAndCheckNeighbors() {
     this.show();
@@ -59,6 +69,7 @@ class Cell {
   }
 
   getContent(showMines) {
+    console.log('getContent')
     if (!showMines && !this.revealed) {
       return null;
     } else if (this.mine) {
@@ -72,6 +83,7 @@ class Cell {
     document.getElementById(this.id).className = this.getContent(showMines);
   }
 }
+
 
 class Board {
   constructor(game, width, height) {
@@ -88,6 +100,7 @@ class Board {
       this.cells.push(row);
     }
   }
+
 
   placeMines(numMines) {
     let placed = 0;
