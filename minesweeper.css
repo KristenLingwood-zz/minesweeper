@@ -39,7 +39,15 @@ td {
   color: black;
 }
 
+.flagged:after {
+  content: '?'
+}
+
 .unflagged {
   background-color: none;
   color: black;
+}
+
+.unflagged:after {
+  content: '';
 }

@@ -46,6 +46,7 @@ class Cell {
   handleRightClick(evt) {
     evt.preventDefault();
     this.flagged = !this.flagged;
+    this.show(true);
     this.toggledFlagged()
   }
 
