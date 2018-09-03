@@ -7,23 +7,19 @@ class Cell {
     this.id = `r${y}c${x}`;
     this.mine = false;     // is this a mine?
     this.revealed = false; // is this cell revealed?
-    this.number = 0;       // Number of mine neighbors                     
+    this.number = 0;       // Number of mine neighbors  
+    this.flagged = false;
   }
-
   // checks through all neighboring cells
   neighbors() {
-    // new array of coords... what are these?
     let out = [];
-    // iterate from -1 to 1... what is xdelta? x change?
     for (let xdelta = -1; xdelta <= 1; xdelta++) {
-      // y iteration
       for (let ydelta = -1; ydelta <= 1; ydelta++) {
         // if x and y are the same break this iteration and move on to the next one
         if (xdelta === 0 && ydelta === 0) continue;
-        // define new xy coords
         let newX = this.x + xdelta;
         let newY = this.y + ydelta;
-        //chec if x and y coords are inside the board
+        //check if x and y coords are inside the board
         if (newX >= 0 && newX < this.board.width
           && newY >= 0 && newY < this.board.height)
           out.push(this.board.cells[newY][newX]);
@@ -34,15 +30,30 @@ class Cell {
 
   //runs when user clicks a cell
   handleClick() {
+    if (this.flagged) return;
     //reveal cell clicked and check neighbors
     this.revealAndCheckNeighbors();
-    console.log("board remaining", this.board.remaining)
     //if cell clicked is a mine the game is over
     if (this.mine) {
       return this.board.game.endGame()
       //if no more mines left user wins
     } else if (this.board.remaining === 0) {
       return this.board.game.endGame(true)
+    }
+  }
+
+  //right click flags a cell as a mine and makes it unclickable
+  handleRightClick(evt) {
+    evt.preventDefault();
+    this.flagged = !this.flagged;
+    this.toggledFlagged()
+  }
+
+  toggledFlagged() {
+    if (this.flagged) {
+      document.getElementById(this.id).className = 'flagged'
+    } else {
+      document.getElementById(this.id).className = 'unflagged'
     }
   }
 
@@ -81,6 +92,8 @@ class Cell {
       return null;
     } else if (this.mine) {
       return "mine";
+    } else if (this.flagged) {
+      return 'flagged';
     } else {
       return "n" + this.number;
     }
@@ -139,6 +152,8 @@ class Board {
         tcell.id = cell.id;
         tcell.className = cell.getContent(false);
         tcell.addEventListener("click", cell.handleClick.bind(cell))
+        tcell.addEventListener("contextmenu", cell.handleRightClick.bind(cell))
+
         trow.appendChild(tcell);
       }
       board.appendChild(trow);

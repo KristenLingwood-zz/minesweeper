@@ -33,3 +33,13 @@ td {
 
 .mine { background-color: red; color: black}
 .mine:after { content: "X"}
+
+.flagged {
+  background-color: red;
+  color: black;
+}
+
+.unflagged {
+  background-color: none;
+  color: black;
+}
