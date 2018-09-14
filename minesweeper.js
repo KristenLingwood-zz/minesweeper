@@ -178,9 +178,21 @@ class Game {
     }
     if (!winner) {
       alert("You lose");
+      playingGame = false;
     } else {
       alert('YOU WIN!')
+      playingGame = false;
     }
   }
 }
-const game = new Game(11, 11, 11);
+
+
+var playingGame = false;
+document.getElementById("playgame").addEventListener('click', function () {
+  if (!playingGame) {
+    playingGame = true;
+    let board = document.getElementById('board');
+    board.innerHTML = '';
+    let game = new Game(11, 11, 11);
+  }
+})
