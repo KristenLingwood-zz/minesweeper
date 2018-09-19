@@ -163,28 +163,6 @@ class Board {
   }
 }
 
-class Timer {
-  constructor() {
-    this.seconds = 0;
-    this.minutes = 0;
-  }
-
-  addTime() {
-    console.log('addTime()')
-    let minutes = this.minutes;
-    let seconds = this.seconds;
-    seconds++;
-    if (seconds >= 60) {
-      seconds = 0;
-      minutes++;
-    }
-    let timer = document.getElementById('timer')
-    timer.textContext = 'Time:' + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds)
-  }
-  runTimer() {
-    setTimeout(this.addTime, 1000)
-  }
-}
 
 class Game {
   constructor(width, height, numMines) {
@@ -217,8 +195,6 @@ document.getElementById("playgame").addEventListener('click', function () {
     let board = document.getElementById('board');
     board.innerHTML = '';
     let game = new Game(11, 11, 11);
-    let timer = new Timer()
-    timer.runTimer();
   }
 })
 
