@@ -60,7 +60,7 @@ body {
   align-items: center
 }
 
-.heading {
+.game {
   text-align: center;
   margin-bottom: 3%;
 }
@@ -70,8 +70,3 @@ button {
   height: 25px;
 }
 
-.game {
-  display: flex;
-  flex-direction: column;
-  padding: 3%;
-}
